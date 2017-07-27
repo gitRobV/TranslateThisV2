@@ -53,7 +53,7 @@ class LogInVC: UIViewController {
     
     func speak(string: String) {
         let rawText = string
-        let utterance = AVSpeechUttlserance(string: rawText)
+        let utterance = AVSpeechUtterance(string: rawText)
         utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
         self.synthesizer.speak(utterance)
         
