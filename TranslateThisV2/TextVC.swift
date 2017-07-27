@@ -49,11 +49,11 @@ class TextVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
             } else if pickerView.selectedRow(inComponent: 0) == 1 {
                 language = "ko"
                 voice = "ko-KR"
-                process = "지금 번역 중입니다"
+                process = "지금 번역 중입니다ahora"
             } else if pickerView.selectedRow(inComponent: 0) == 2 {
                 language = "pt"
                 voice = "pt-BR"
-                process = "Traduzindo agora"
+                process = "Traduciendo ahora"
             } else if pickerView.selectedRow(inComponent: 0) == 3 {
                 language = "en"
                 voice = "en-US"

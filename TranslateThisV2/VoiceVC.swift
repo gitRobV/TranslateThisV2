@@ -15,10 +15,20 @@ import UIKit
 class VoiceVC: UIViewController, SFSpeechRecognizerDelegate {
     
     //Variables and Outlets
+    
+    @IBOutlet weak var menuBtn: UIBarButtonItem!
+    @IBOutlet weak var textBtn: UIBarButtonItem!
+    
     @IBOutlet weak var pickerView: UIPickerView!
+    
+    
     @IBOutlet weak var spokenTextLabel: UILabel!
     @IBOutlet weak var translatedTextLabel: UILabel!
     
+    
+    @IBOutlet weak var recordBtn: UIButton!
+    @IBOutlet weak var saveBtn: UIButton!
+
     var languages = ["Spanish", "Korean", "Portuguese", "English"]
     let audioEngine = AVAudioEngine()
     let speechRecognizer: SFSpeechRecognizer? = SFSpeechRecognizer()
@@ -27,9 +37,12 @@ class VoiceVC: UIViewController, SFSpeechRecognizerDelegate {
     var audioPlayer: AVAudioPlayer!
     var recording = false
     
-    //Buttons
     
-    @IBAction func recordBtn(_ sender: UIButton) {
+    
+    //Button Actions
+    
+    @IBAction func recordBtnPressed(_ sender: UIButton) {
+
         print("record pressed")
         if recording {
             audioEngine.stop()
@@ -37,19 +50,35 @@ class VoiceVC: UIViewController, SFSpeechRecognizerDelegate {
                 node.removeTap(onBus: 0)
             }
             recognitionTask?.cancel()
-//            recordBtn.backgroundColor = UIColor.red
+            recordBtn.backgroundColor = UIColor.red
             recording = false
         } else if !recording {
             self.recordAndRecognizeSpeech()
-//            recordBtn.backgroundColor = UIColor.green
+            recordBtn.backgroundColor = UIColor.green
             recording = true
         }
 
     }
     
-    @IBAction func saveBtn(_ sender: UIButton) {
+    @IBAction func saveBtnPressed(_ sender: UIButton) {
         print("save pressed")
     }
+    
+    
+    
+    // Slide Menu Functions
+    
+    func sideMenu() {
+        if revealViewController() != nil {
+            menuBtn.target = revealViewController()
+            menuBtn.action = #selector(SWRevealViewController.revealToggle(_:))
+            revealViewController().rearViewRevealWidth = 175
+            
+            view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
+    }
+    
+    
     
     
     //UIPicker info
@@ -71,6 +100,7 @@ class VoiceVC: UIViewController, SFSpeechRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        sideMenu()
         self.pickerView.dataSource = self as? UIPickerViewDataSource
         self.pickerView.delegate = self as? UIPickerViewDelegate
         // Do any additional setup after loading the view, typically from a nib.

@@ -64,9 +64,8 @@ class LogInVC: UIViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            let tabBarController = segue.destination as! UITabBarController
-            let destinationVC = tabBarController.viewControllers?[1] as! TextVC
-            destinationVC.username = sender as? String
+            let revealController = segue.destination as! SWRevealViewController
+            let destinationVC = revealController.frontViewController
         }
         
         
