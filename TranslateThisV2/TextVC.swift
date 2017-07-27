@@ -31,7 +31,7 @@ class TextVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
     @IBAction func translateButtonPressed(_ sender: UIButton) {
         
-        let process = "Translating your phrase now."
+        var process = String ()
         
         
         if let stringToParse = phraseInput.text {
@@ -45,15 +45,19 @@ class TextVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
             if pickerView.selectedRow(inComponent: 0) == 0{
                 language = "es"
                 voice = "es-ES"
+                process = "Traduciendo ahora"
             } else if pickerView.selectedRow(inComponent: 0) == 1 {
                 language = "ko"
                 voice = "ko-KR"
+                process = "지금 번역 중입니다"
             } else if pickerView.selectedRow(inComponent: 0) == 2 {
                 language = "pt"
                 voice = "pt-BR"
+                process = "Traduzindo agora"
             } else if pickerView.selectedRow(inComponent: 0) == 3 {
                 language = "en"
                 voice = "en-US"
+                process = "Translating Now"
             }
             
             let url = URL(string: "https://translation.googleapis.com/language/translate/v2?key=AIzaSyCxfmolIMWqxSLSJZXvBCkT1gmNKrbDRvQ&q=" + parsedString + "&target=" + language)
@@ -74,6 +78,7 @@ class TextVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
                         
                         DispatchQueue.main.async {
                             self.resultsLabel.text = self.translatedText
+                            self.newSpeak(string: process, languaged: voice)
                             self.newSpeak(string: self.translatedText!, languaged: voice)
                         }
                         
@@ -84,9 +89,6 @@ class TextVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
                 }
             })
             task.resume()
-            DispatchQueue.main.async {
-                self.newSpeak(string: process, languaged: voice)
-            }
         } else {
             print("Please write a valid word")
         }
