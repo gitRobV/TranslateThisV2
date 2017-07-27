@@ -12,7 +12,7 @@ import Foundation
 import UIKit
 
 
-class VoiceVC: UIViewController, SFSpeechRecognizerDelegate {
+class VoiceVC: UIViewController, SFSpeechRecognizerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     //Variables and Outlets
     @IBOutlet weak var pickerView: UIPickerView!
@@ -20,11 +20,17 @@ class VoiceVC: UIViewController, SFSpeechRecognizerDelegate {
     @IBOutlet weak var translatedTextLabel: UILabel!
     
     var languages = ["Spanish", "Korean", "Portuguese", "English"]
+    var language = "es"
+    var voice = "es-MX"
+    var transText = ""
+    var pickerIdx = 0
+    var username: String?
     let audioEngine = AVAudioEngine()
     let speechRecognizer: SFSpeechRecognizer? = SFSpeechRecognizer()
     let request = SFSpeechAudioBufferRecognitionRequest()
     var recognitionTask: SFSpeechRecognitionTask?
     var audioPlayer: AVAudioPlayer!
+    let synthesizer = AVSpeechSynthesizer()
     var recording = false
     
     //Buttons
@@ -40,17 +46,93 @@ class VoiceVC: UIViewController, SFSpeechRecognizerDelegate {
 //            recordBtn.backgroundColor = UIColor.red
             recording = false
         } else if !recording {
-            self.recordAndRecognizeSpeech()
+            recordAndRecognizeSpeech()
 //            recordBtn.backgroundColor = UIColor.green
             recording = true
         }
-
     }
     
     @IBAction func saveBtn(_ sender: UIButton) {
         print("save pressed")
+        let newPhrase = spokenTextLabel.text
+        let newTrans = translatedTextLabel.text
+        let user = username!
+        
+        var user_id: Int?
+        
+        
+        let userAPI = "http://13.59.119.156/users/"
+        let phraseAPI = "http://13.59.119.156/phrases/"
+        
+        getRequestSession(urlStr: userAPI, completionHandler: {
+            data, response, error in
+            
+            do {
+                if let requestResults = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSArray {
+                    var userExists = false
+                    for object in requestResults {
+                        let currUsers = object as! NSDictionary
+                        if currUsers["username"] as? String == user {
+                            if let newUser = currUsers["id"] {
+                                user_id = newUser as? Int
+                            }
+                            userExists = true
+                            break
+                        }
+                    }
+                    
+                    if userExists == true {
+                        
+                        self.postPhraseRequestSession(urlStr: phraseAPI, user_id: user_id!, newPhrase: newPhrase!, newTrans: newTrans!, completionHandler: {
+                            data, response, error in
+                            do {
+                                
+                                if let requestResults = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSArray {
+                                }
+                            } catch { print(error) }
+                        })
+                        
+                    }
+                    else {
+                        self.postRequestSession(urlStr: userAPI, username: user, completionHandler: {
+                            data, respones, error in
+                            
+                            do {
+                                if let userData = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSDictionary {
+                                    if let newUser = userData["id"] {
+                                        user_id = newUser as? Int
+                                    }
+                                    self.postPhraseRequestSession(urlStr: phraseAPI, user_id: user_id!, newPhrase: newPhrase!, newTrans: newTrans!, completionHandler: {
+                                        data, resones, error in
+                                        
+                                        do {
+                                            if let requestResults = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSArray {
+                                            }
+                                        } catch { print(error) }
+                                    })
+                                }
+                            } catch { print(error) }
+                        })
+                    }
+                }
+            } catch { print(error) }
+        })
+        
+//        self.phraseInput.text = nil
+//        self.resultsLabel.text = "Saved"
     }
     
+    @IBAction func playBtn(_ sender: UIButton) {
+        print("play pressed")
+        if pickerView.selectedRow(inComponent: 0) == pickerIdx {
+            speak(string: translatedTextLabel.text!, language: voice)
+        } else{
+            translate(text: spokenTextLabel.text)
+            sleep(1)
+            speak(string: transText, language: voice)
+        }
+    }
+
     
     //UIPicker info
     
@@ -130,9 +212,32 @@ class VoiceVC: UIViewController, SFSpeechRecognizerDelegate {
     func translate(text:String?) -> String {
         if let toBeTranaslated = text {
             let newToBeTranslated = toBeTranaslated.replacingOccurrences(of: " ", with: "+")
-            let languaged = "es"
+            
+            print(pickerView.selectedRow(inComponent: 0))
+            if pickerView.selectedRow(inComponent: 0) == 0{
+                language = "es"
+                voice = "es-MX"
+                pickerIdx = 0
+            } else if pickerView.selectedRow(inComponent: 0) == 1 {
+                language = "ko"
+                voice = "ko-KR"
+                pickerIdx = 1
+            } else if pickerView.selectedRow(inComponent: 0) == 2 {
+                language = "pt"
+                voice = "pt-BR"
+                pickerIdx = 2
+            } else if pickerView.selectedRow(inComponent: 0) == 3 {
+                language = "en"
+                voice = "en-US"
+                pickerIdx = 3
+            }
+            
+            
+            
+            
+            
             print(newToBeTranslated)
-            let url = URL(string: "https://translation.googleapis.com/language/translate/v2?key=AIzaSyCxfmolIMWqxSLSJZXvBCkT1gmNKrbDRvQ&q=" + newToBeTranslated + "&target=" + languaged)
+            let url = URL(string: "https://translation.googleapis.com/language/translate/v2?key=AIzaSyCxfmolIMWqxSLSJZXvBCkT1gmNKrbDRvQ&q=" + newToBeTranslated + "&target=" + language)
             // create a URLSession to handle the request tasks
             let session = URLSession.shared
             // create a "data task" to make the request and run completion handler
@@ -150,10 +255,11 @@ class VoiceVC: UIViewController, SFSpeechRecognizerDelegate {
                         let transl = data["translations"] as! NSArray
                         let translationDict = transl[0] as! NSDictionary
                         let translatedText = translationDict["translatedText"] as! String
+                        self.transText = translatedText
                         print(translatedText)
+//                        self.translatedTextLabel.text = translatedText
                         DispatchQueue.main.async {
-//                            self.passedIn.text = ("Phrase: \(self.thePhrase.text!)")
-                            self.translatedTextLabel.text = ("Translation: \(translatedText)")
+                            self.translatedTextLabel.text = translatedText
 //                            self.thePhrase.text = ""
                         }
                         
@@ -170,6 +276,62 @@ class VoiceVC: UIViewController, SFSpeechRecognizerDelegate {
             print("Please write a valid word")
         }
         return translatedTextLabel.text!
+    }
+    
+    func speak(string: String, language: String) {
+        
+        var voiceToUse: AVSpeechSynthesisVoice?
+        for voice in AVSpeechSynthesisVoice.speechVoices() {
+            if #available(iOS 9.0, *) {
+                if voice.language == language {
+                    voiceToUse = voice
+                    print("Found Voice to use: \(voice)")
+                }
+            }
+        }
+        
+        let rawText = string
+        let utterance = AVSpeechUtterance(string: rawText)
+        utterance.voice = voiceToUse
+        self.synthesizer.speak(utterance)
+        
+    }
+    
+    func getRequestSession(urlStr: String, completionHandler:@escaping (_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void) {
+        
+        let url = URL(string: urlStr)
+        
+        let session = URLSession.shared
+        
+        let task = session.dataTask(with: url!, completionHandler: completionHandler)
+        
+        task.resume()
+    }
+    
+    
+    func postPhraseRequestSession(urlStr: String, user_id: Int, newPhrase: String, newTrans: String,  completionHandler:@escaping(_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void)  {
+        if let url = URL(string: urlStr){
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            let bodyData = "user=\(user_id)&phrase=\(newPhrase)&translation=\(newTrans)"
+            request.httpBody = bodyData.data(using: .utf8)
+            let session = URLSession.shared
+            let task = session.dataTask(with: request as URLRequest, completionHandler: completionHandler)
+            task.resume()
+        }
+    }
+    
+    
+    func postRequestSession(urlStr: String, username: String, completionHandler:@escaping(_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void)  {
+        if let url = URL(string: urlStr){
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            let bodyData = "username=\(username)"
+            request.httpBody = bodyData.data(using: .utf8)
+            let session = URLSession.shared
+            let task = session.dataTask(with: request as URLRequest, completionHandler: completionHandler)
+            task.resume()
+        }
     }
     
 }
