@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Log InVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TranslateThisV2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LogInVC" customModule="TranslateThisV2" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -22,8 +22,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_img" translatesAutoresizingMaskIntoConstraints="NO" id="QOg-c7-Ils">
-                                <rect key="frame" x="0.0" y="-0.5" width="375" height="668"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="bg_img" translatesAutoresizingMaskIntoConstraints="NO" id="QOg-c7-Ils">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="668"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_img" translatesAutoresizingMaskIntoConstraints="NO" id="HIl-D5-jnT">
                                 <rect key="frame" x="66" y="90" width="243" height="69"/>
@@ -32,11 +32,11 @@
                                 <rect key="frame" x="31" y="319" width="313" height="34"/>
                                 <color key="backgroundColor" red="0.94901960784313721" green="0.39215686274509803" blue="0.098039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                <state key="normal" title="Button">
+                                <state key="normal" title="Log In">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="hH0-ZY-mO6" kind="presentation" id="Urk-RJ-d1J"/>
+                                    <action selector="LogInPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oRS-uy-aaw"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XN4-1e-HeX">
@@ -75,6 +75,11 @@
                             <constraint firstItem="XN4-1e-HeX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="15" id="xRU-Gv-Rtq"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="PasswordInput" destination="feC-Ar-nuc" id="ubB-Td-i3m"/>
+                        <outlet property="UserInput" destination="XN4-1e-HeX" id="3kA-nL-pi6"/>
+                        <segue destination="hH0-ZY-mO6" kind="presentation" identifier="LoginSegue" id="xW2-ZX-eAP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -83,7 +88,7 @@
         <!--Text-->
         <scene sceneID="WYm-XF-zGO">
             <objects>
-                <viewController id="WoH-ya-Qu1" sceneMemberID="viewController">
+                <viewController id="WoH-ya-Qu1" customClass="TextVC" customModule="TranslateThisV2" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="I5E-AG-1G6"/>
                         <viewControllerLayoutGuide type="bottom" id="lqQ-jv-g6n"/>
@@ -100,12 +105,6 @@
                                 </constraints>
                                 <state key="normal" image="mic_logo"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This text was translated!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5DJ-Co-M37">
-                                <rect key="frame" x="16" y="443" width="343" height="167"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" red="0.94901960780000005" green="0.3921568627" blue="0.098039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="uPb-ca-f9a">
                                 <rect key="frame" x="16" y="152" width="343" height="170"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -125,6 +124,9 @@
                                 <state key="normal" title="Save">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="saveButtonPressed:" destination="WoH-ya-Qu1" eventType="touchUpInside" id="R8H-lI-M9g"/>
+                                </connections>
                             </button>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M09-bP-Pre">
                                 <rect key="frame" x="16" y="330" width="240" height="135"/>
@@ -141,7 +143,16 @@
                                     <constraint firstAttribute="height" constant="32" id="m9L-Bv-uOT"/>
                                 </constraints>
                                 <state key="normal" image="play_icon"/>
+                                <connections>
+                                    <action selector="translateButtonPressed:" destination="WoH-ya-Qu1" eventType="touchUpInside" id="YZe-01-AQ6"/>
+                                </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This text was translated!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5DJ-Co-M37">
+                                <rect key="frame" x="16" y="443" width="343" height="167"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.94901960780000005" green="0.3921568627" blue="0.098039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.52549019607843139" green="0.73333333333333328" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -163,6 +174,11 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Text" selectedImage="text_icon" id="wFN-uk-1XV"/>
+                    <connections>
+                        <outlet property="phraseInput" destination="uPb-ca-f9a" id="gES-EB-SyH"/>
+                        <outlet property="pickerView" destination="M09-bP-Pre" id="fSy-6x-XNA"/>
+                        <outlet property="resultsLabel" destination="5DJ-Co-M37" id="tEm-Vk-4hv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="otl-VG-vd3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -238,7 +254,7 @@
         <!--Voice-->
         <scene sceneID="Hiz-9C-9b2">
             <objects>
-                <viewController id="lWK-tp-D4B" sceneMemberID="viewController">
+                <viewController id="lWK-tp-D4B" customClass="VoiceVC" customModule="TranslateThisV2" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8yQ-ce-20l"/>
                         <viewControllerLayoutGuide type="bottom" id="Uah-bR-4jK"/>
@@ -290,7 +306,7 @@
                                     <constraint firstAttribute="height" constant="25" id="nqf-QK-uiS"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                <color key="textColor" red="0.91452801169999998" green="0.91452801169999998" blue="0.91452801169999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aYq-cS-qZH">
@@ -345,9 +361,10 @@
         <!--Tab Bar Controller-->
         <scene sceneID="dDH-OX-JTW">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="hH0-ZY-mO6" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" modalTransitionStyle="flipHorizontal" id="hH0-ZY-mO6" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="5NI-i1-uso">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
