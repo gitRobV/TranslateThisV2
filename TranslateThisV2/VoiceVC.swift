@@ -49,12 +49,11 @@ class VoiceVC: UIViewController, SFSpeechRecognizerDelegate, UIPickerViewDelegat
                 node.removeTap(onBus: 0)
             }
             recognitionTask?.cancel()
-//            recordBtnVisual.backgroundColor = UIColor.red
-            recordBtnVisual.imageView?.image = #imageLiteral(resourceName: "mic_rec_logo")
+            sender.setImage(#imageLiteral(resourceName: "mic_logo"), for: UIControlState.normal)
             recording = false
         } else if !recording {
             recordAndRecognizeSpeech()
-            recordBtnVisual.imageView?.image = #imageLiteral(resourceName: "mic_logo")
+            sender.setImage(#imageLiteral(resourceName: "mic_rec_logo"), for: UIControlState.normal)
             recording = true
         }
     }
@@ -162,7 +161,12 @@ class VoiceVC: UIViewController, SFSpeechRecognizerDelegate, UIPickerViewDelegat
         super.viewDidLoad()
         self.pickerView.dataSource = self as? UIPickerViewDataSource
         self.pickerView.delegate = self as? UIPickerViewDelegate
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        if let user = username {
+            let greeting = "\(String(describing: user)), What would you like to translate"
+            self.speak(string: greeting, language: "en-US")
+        }
+
     }
     
     override func didReceiveMemoryWarning() {
