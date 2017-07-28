@@ -113,6 +113,10 @@ class TranslationsTVC: UITableViewController {
         return cell
         
     }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        speakTranslation(for: indexPath as NSIndexPath)
+
+    }
     
     
 //    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
