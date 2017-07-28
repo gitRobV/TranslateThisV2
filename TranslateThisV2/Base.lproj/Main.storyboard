@@ -263,7 +263,7 @@
                             <outlet property="delegate" destination="9iA-Sd-0wZ" id="Dyz-8f-NrG"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" systemItem="recents" id="nkQ-6w-p3N"/>
+                    <tabBarItem key="tabBarItem" systemItem="mostViewed" id="nkQ-6w-p3N"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oFh-EW-D9s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -405,11 +405,97 @@
                         <segue destination="lWK-tp-D4B" kind="relationship" relationship="viewControllers" id="jgd-OU-LcX"/>
                         <segue destination="WoH-ya-Qu1" kind="relationship" relationship="viewControllers" id="z7n-5i-bSy"/>
                         <segue destination="9iA-Sd-0wZ" kind="relationship" relationship="viewControllers" id="jbc-T1-Tbw"/>
+                        <segue destination="zHP-Ah-vQR" kind="relationship" relationship="viewControllers" id="IIS-Vh-Cyh"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DsW-BS-acO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1036" y="122.78860569715144"/>
+        </scene>
+        <!--Recent Translations-->
+        <scene sceneID="rWo-Hc-iu0">
+            <objects>
+                <tableViewController title="Recent Translations" id="zHP-Ah-vQR" customClass="myTranslationsVC" customModule="TranslateThisV2" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="QZC-H1-cCb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TransCell" id="Q7C-Ci-5kh" customClass="TransCell" customModule="TranslateThisV2" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="60"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Q7C-Ci-5kh" id="bod-Fb-eyc">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mic_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Yua-QF-oTM">
+                                            <rect key="frame" x="0.0" y="0.0" width="55" height="60"/>
+                                            <color key="backgroundColor" red="0.20000000000000001" green="0.39607843139999999" blue="0.54117647059999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="55" id="8MQ-Nv-T9K"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spoken Text" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ntL-2X-CUP">
+                                            <rect key="frame" x="63" y="8" width="304" height="44"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ErB-zC-MyB">
+                                            <rect key="frame" x="0.0" y="58" width="375" height="1"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="1" id="f7y-jL-73w"/>
+                                            </constraints>
+                                        </view>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="499-CD-vLm">
+                                            <rect key="frame" x="0.0" y="0.0" width="55" height="59"/>
+                                            <state key="normal" image="mic_icon"/>
+                                            <connections>
+                                                <action selector="micButtonPressed:" destination="Q7C-Ci-5kh" eventType="touchUpInside" id="ZaU-CJ-1f1"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="499-CD-vLm" firstAttribute="top" secondItem="bod-Fb-eyc" secondAttribute="topMargin" constant="-8" id="0ai-Ws-6Yr"/>
+                                        <constraint firstItem="ErB-zC-MyB" firstAttribute="top" secondItem="499-CD-vLm" secondAttribute="bottom" constant="-1" id="2r5-T1-awg"/>
+                                        <constraint firstAttribute="trailing" secondItem="ErB-zC-MyB" secondAttribute="trailing" id="3kU-tq-Ww3"/>
+                                        <constraint firstItem="ntL-2X-CUP" firstAttribute="leading" secondItem="Yua-QF-oTM" secondAttribute="trailing" constant="8" id="5cN-5N-HeH"/>
+                                        <constraint firstItem="ErB-zC-MyB" firstAttribute="leading" secondItem="bod-Fb-eyc" secondAttribute="leading" id="7ma-0e-kJN"/>
+                                        <constraint firstItem="Yua-QF-oTM" firstAttribute="top" secondItem="bod-Fb-eyc" secondAttribute="top" id="C5x-QD-jAj"/>
+                                        <constraint firstItem="499-CD-vLm" firstAttribute="leading" secondItem="bod-Fb-eyc" secondAttribute="leadingMargin" constant="-8" id="CRY-wT-48W"/>
+                                        <constraint firstItem="ntL-2X-CUP" firstAttribute="leading" secondItem="Yua-QF-oTM" secondAttribute="trailing" constant="8" id="Czh-Tt-n3I"/>
+                                        <constraint firstItem="499-CD-vLm" firstAttribute="leading" secondItem="bod-Fb-eyc" secondAttribute="leadingMargin" constant="-8" id="DJa-zA-dE0"/>
+                                        <constraint firstItem="499-CD-vLm" firstAttribute="top" secondItem="bod-Fb-eyc" secondAttribute="topMargin" constant="-8" id="M3M-JL-Jgh"/>
+                                        <constraint firstItem="Yua-QF-oTM" firstAttribute="top" secondItem="bod-Fb-eyc" secondAttribute="top" id="NoZ-Ut-HPJ"/>
+                                        <constraint firstItem="ntL-2X-CUP" firstAttribute="leading" secondItem="499-CD-vLm" secondAttribute="trailing" constant="8" id="Qg5-VF-AQS"/>
+                                        <constraint firstAttribute="bottom" secondItem="Yua-QF-oTM" secondAttribute="bottom" id="Qqb-Rb-lOO"/>
+                                        <constraint firstItem="ntL-2X-CUP" firstAttribute="top" secondItem="bod-Fb-eyc" secondAttribute="top" constant="8" id="ZU9-3v-IdN"/>
+                                        <constraint firstAttribute="bottom" secondItem="Yua-QF-oTM" secondAttribute="bottom" id="aZk-Hy-BVg"/>
+                                        <constraint firstAttribute="bottom" secondItem="ErB-zC-MyB" secondAttribute="bottom" id="iZz-Xw-Dhk"/>
+                                        <constraint firstAttribute="trailing" secondItem="ntL-2X-CUP" secondAttribute="trailing" constant="8" id="klX-Jg-3oV"/>
+                                        <constraint firstAttribute="bottom" secondItem="ntL-2X-CUP" secondAttribute="bottom" constant="8" id="ndo-lK-VhF"/>
+                                        <constraint firstItem="Yua-QF-oTM" firstAttribute="leading" secondItem="bod-Fb-eyc" secondAttribute="leading" id="o95-te-a7E"/>
+                                        <constraint firstItem="Yua-QF-oTM" firstAttribute="leading" secondItem="bod-Fb-eyc" secondAttribute="leading" id="pxa-hw-u3r"/>
+                                        <constraint firstItem="ErB-zC-MyB" firstAttribute="top" secondItem="499-CD-vLm" secondAttribute="bottom" constant="-1" id="qeZ-Q7-k8S"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.52549019610000003" green="0.73333333329999995" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="PhraseLabel" destination="ntL-2X-CUP" id="VNQ-a0-7je"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="zHP-Ah-vQR" id="6ep-lc-xzc"/>
+                            <outlet property="delegate" destination="zHP-Ah-vQR" id="6zM-DW-hgH"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" systemItem="history" id="r3N-Fq-BRe"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O1P-zX-aju" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="836" y="1178"/>
         </scene>
     </scenes>
     <resources>

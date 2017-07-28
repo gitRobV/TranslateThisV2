@@ -12,6 +12,7 @@ import UIKit
 class TransCell: UITableViewCell {
     
     var Delegate: TranslationsTVC?
+    var Delegate2: myTranslationsVC?
     var indexPath: NSIndexPath?
     
     
