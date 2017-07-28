@@ -35,7 +35,7 @@ class VoiceVC: UIViewController, SFSpeechRecognizerDelegate, UIPickerViewDelegat
     let speechRecognizer: SFSpeechRecognizer? = SFSpeechRecognizer()
     let request = SFSpeechAudioBufferRecognitionRequest()
     var recognitionTask: SFSpeechRecognitionTask?
-    var audioPlayer: AVAudioPlayer!
+
     let synthesizer = AVSpeechSynthesizer()
     var recording = false
     
@@ -123,13 +123,9 @@ class VoiceVC: UIViewController, SFSpeechRecognizerDelegate, UIPickerViewDelegat
                 }
             } catch { print(error) }
         })
-        
-//        self.phraseInput.text = nil
-//        self.resultsLabel.text = "Saved"
     }
     
     @IBAction func playBtn(_ sender: UIButton) {
-        print("play pressed")
         if pickerView.selectedRow(inComponent: 0) == pickerIdx {
             speak(string: translatedTextLabel.text!, language: voice)
         } else{
@@ -206,18 +202,14 @@ class VoiceVC: UIViewController, SFSpeechRecognizerDelegate, UIPickerViewDelegat
         recognitionTask = speechRecognizer?.recognitionTask(with: request, resultHandler: {
             result, error in
             if let result = result {
-                print("in task")
                 let bestString = result.bestTranscription.formattedString
                 self.spokenTextLabel.text = bestString
-                print("wtf")
                 self.translate(text: bestString)
             } else if let error = error {
                 print(error)
-                print("the errors")
+
             }
         })
-        print("It stopped")
-        
     }
     
     func translate(text:String?) -> String {

@@ -12,12 +12,10 @@ import AVFoundation
 class TextVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
     var username: String?
-    
     var translatedText: String?
     
     let synthesizer = AVSpeechSynthesizer()
-    
-    
+    var selectedVoice: String?
     
     
     
@@ -59,6 +57,9 @@ class TextVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
                 voice = "en-US"
                 process = "Translating Now"
             }
+            
+            
+            self.selectedVoice = voice
             
             let url = URL(string: "https://translation.googleapis.com/language/translate/v2?key=AIzaSyCxfmolIMWqxSLSJZXvBCkT1gmNKrbDRvQ&q=" + parsedString + "&target=" + language)
             
@@ -106,6 +107,11 @@ class TextVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
         let user = username!
         
         var user_id: Int?
+        var translated_lang: String?
+        if let voice = self.selectedVoice {
+            translated_lang = voice
+            print(voice)
+        }
         
         
         let userAPI = "http://13.59.119.156/users/"
@@ -113,24 +119,31 @@ class TextVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
         
         getRequestSession(urlStr: userAPI, completionHandler: {
             data, response, error in
-            
+            print("Data: \(String(describing: data))")
+            print("Response: \(String(describing: response))")
+            print("Error: \(String(describing: error))")
             do {
                 if let requestResults = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSArray {
+                    print("Request Results: \(requestResults.count)")
                     var userExists = false
-                    for object in requestResults {
-                        let currUsers = object as! NSDictionary
-                        if currUsers["username"] as? String == user {
-                            if let newUser = currUsers["id"] {
-                                user_id = newUser as? Int
+                    if requestResults.count == 0 {
+                        print("you are the First Ever User!!")
+                    } else {
+                        for object in requestResults {
+                            let currUsers = object as! NSDictionary
+                            if currUsers["username"] as? String == user {
+                                if let newUser = currUsers["id"] {
+                                    user_id = newUser as? Int
+                                }
+                                userExists = true
+                                break
                             }
-                            userExists = true
-                            break
                         }
                     }
                     
+                    
                     if userExists == true {
-
-                        self.postPhraseRequestSession(urlStr: phraseAPI, user_id: user_id!, newPhrase: newPhrase!, newTrans: newTrans!, completionHandler: {
+                        self.postPhraseRequestSession(urlStr: phraseAPI, user_id: user_id!, newPhrase: newPhrase!, newTrans: newTrans!, translated_lang: translated_lang!, completionHandler: {
                             data, response, error in
                             do {
                                 
@@ -149,7 +162,7 @@ class TextVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
                                     if let newUser = userData["id"] {
                                         user_id = newUser as? Int
                                     }
-                                    self.postPhraseRequestSession(urlStr: phraseAPI, user_id: user_id!, newPhrase: newPhrase!, newTrans: newTrans!, completionHandler: {
+                                    self.postPhraseRequestSession(urlStr: phraseAPI, user_id: user_id!, newPhrase: newPhrase!, newTrans: newTrans!, translated_lang: translated_lang!, completionHandler: {
                                         data, resones, error in
                                         
                                         do {
@@ -162,6 +175,8 @@ class TextVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
                         })
                     }
                 }
+                
+                
             } catch { print(error) }
         })
         
@@ -187,11 +202,23 @@ class TextVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
     
-    func postPhraseRequestSession(urlStr: String, user_id: Int, newPhrase: String, newTrans: String,  completionHandler:@escaping(_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void)  {
+//    func postPhraseRequestSession(urlStr: String, user_id: Int, newPhrase: String, newTrans: String,  completionHandler:@escaping(_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void)  {
+//        if let url = URL(string: urlStr){
+//            var request = URLRequest(url: url)
+//            request.httpMethod = "POST"
+//            let bodyData = "user=\(user_id)&phrase=\(newPhrase)&translation=\(newTrans)"
+//            request.httpBody = bodyData.data(using: .utf8)
+//            let session = URLSession.shared
+//            let task = session.dataTask(with: request as URLRequest, completionHandler: completionHandler)
+//            task.resume()
+//        }
+//    }
+    
+    func postPhraseRequestSession(urlStr: String, user_id: Int, newPhrase: String, newTrans: String, translated_lang: String, completionHandler:@escaping(_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void)  {
         if let url = URL(string: urlStr){
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
-            let bodyData = "user=\(user_id)&phrase=\(newPhrase)&translation=\(newTrans)"
+            let bodyData = "user=\(user_id)&phrase=\(newPhrase)&translation=\(newTrans)&translation_lang=\(translated_lang)"
             request.httpBody = bodyData.data(using: .utf8)
             let session = URLSession.shared
             let task = session.dataTask(with: request as URLRequest, completionHandler: completionHandler)
