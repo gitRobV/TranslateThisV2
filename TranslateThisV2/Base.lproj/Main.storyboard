@@ -279,6 +279,9 @@
                                 <state key="normal" title="Save">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="saveBtn:" destination="lWK-tp-D4B" eventType="touchUpInside" id="Zkc-zv-ol1"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This text was translated!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efG-ev-LJ3">
                                 <rect key="frame" x="122" y="116" width="245" height="80"/>
@@ -312,6 +315,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aYq-cS-qZH">
                                 <rect key="frame" x="52" y="161" width="29" height="32"/>
                                 <state key="normal" image="play_icon"/>
+                                <connections>
+                                    <action selector="playBtn:" destination="lWK-tp-D4B" eventType="touchUpInside" id="slE-Do-LBm"/>
+                                </connections>
                             </button>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YY2-re-N1y">
                                 <rect key="frame" x="37" y="204" width="300" height="172"/>
@@ -328,6 +334,9 @@
                                     <constraint firstAttribute="width" constant="132" id="syp-tv-Wr7"/>
                                 </constraints>
                                 <state key="normal" image="mic_logo"/>
+                                <connections>
+                                    <action selector="recordBtn:" destination="lWK-tp-D4B" eventType="touchUpInside" id="OBU-9o-12P"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.52549019610000003" green="0.73333333329999995" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -353,6 +362,12 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Voice" selectedImage="mic_icon" id="Nhz-bb-9u0"/>
+                    <connections>
+                        <outlet property="pickerView" destination="YY2-re-N1y" id="Rm7-07-NrK"/>
+                        <outlet property="recordBtnVisual" destination="I0e-Xk-2DX" id="r91-zn-1gE"/>
+                        <outlet property="spokenTextLabel" destination="HU3-cz-djO" id="0NJ-Le-2hJ"/>
+                        <outlet property="translatedTextLabel" destination="efG-ev-LJ3" id="gxS-pW-w47"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kyn-2P-6WB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -15,9 +15,15 @@ import UIKit
 class VoiceVC: UIViewController, SFSpeechRecognizerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     //Variables and Outlets
+    
     @IBOutlet weak var pickerView: UIPickerView!
+    
+    
     @IBOutlet weak var spokenTextLabel: UILabel!
+    
+    
     @IBOutlet weak var translatedTextLabel: UILabel!
+    @IBOutlet weak var recordBtnVisual: UIButton!
     
     var languages = ["Spanish", "Korean", "Portuguese", "English"]
     var language = "es"
@@ -43,11 +49,12 @@ class VoiceVC: UIViewController, SFSpeechRecognizerDelegate, UIPickerViewDelegat
                 node.removeTap(onBus: 0)
             }
             recognitionTask?.cancel()
-//            recordBtn.backgroundColor = UIColor.red
+//            recordBtnVisual.backgroundColor = UIColor.red
+            recordBtnVisual.imageView?.image = #imageLiteral(resourceName: "mic_rec_logo")
             recording = false
         } else if !recording {
             recordAndRecognizeSpeech()
-//            recordBtn.backgroundColor = UIColor.green
+            recordBtnVisual.imageView?.image = #imageLiteral(resourceName: "mic_logo")
             recording = true
         }
     }
