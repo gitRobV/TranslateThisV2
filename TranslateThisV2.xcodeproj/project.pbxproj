@@ -15,6 +15,8 @@
 		18CC4D121F29486A00F4662E /* TranslateThisV2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18CC4D101F29486A00F4662E /* TranslateThisV2.xcdatamodeld */; };
 		18CC4D141F29486A00F4662E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18CC4D131F29486A00F4662E /* Assets.xcassets */; };
 		18CC4D171F29486A00F4662E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18CC4D151F29486A00F4662E /* LaunchScreen.storyboard */; };
+		18E8C7C11F2AD08A00CA2AB6 /* TranslationsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E8C7C01F2AD08A00CA2AB6 /* TranslationsTVC.swift */; };
+		18E8C7C31F2AD7B100CA2AB6 /* TransCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E8C7C21F2AD7B100CA2AB6 /* TransCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		18CC4D131F29486A00F4662E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18CC4D161F29486A00F4662E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18CC4D181F29486A00F4662E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18E8C7C01F2AD08A00CA2AB6 /* TranslationsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationsTVC.swift; sourceTree = "<group>"; };
+		18E8C7C21F2AD7B100CA2AB6 /* TransCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,8 @@
 				18CC4D0B1F29486A00F4662E /* LogInVC.swift */,
 				18C5DFB41F29D1AB002CFD57 /* TextVC.swift */,
 				180E57351F2ABA5D005BF0EE /* VoiceVC.swift */,
+				18E8C7C21F2AD7B100CA2AB6 /* TransCell.swift */,
+				18E8C7C01F2AD08A00CA2AB6 /* TranslationsTVC.swift */,
 				18CC4D0D1F29486A00F4662E /* Main.storyboard */,
 				18CC4D131F29486A00F4662E /* Assets.xcassets */,
 				18CC4D151F29486A00F4662E /* LaunchScreen.storyboard */,
@@ -105,7 +111,7 @@
 				TargetAttributes = {
 					18CC4D051F29486A00F4662E = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = B66A92GL98;
+						DevelopmentTeam = 3TY58QN48R;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -146,9 +152,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18E8C7C31F2AD7B100CA2AB6 /* TransCell.swift in Sources */,
 				180E57361F2ABA5D005BF0EE /* VoiceVC.swift in Sources */,
 				18CC4D121F29486A00F4662E /* TranslateThisV2.xcdatamodeld in Sources */,
 				18CC4D0C1F29486A00F4662E /* LogInVC.swift in Sources */,
+				18E8C7C11F2AD08A00CA2AB6 /* TranslationsTVC.swift in Sources */,
 				18CC4D0A1F29486A00F4662E /* AppDelegate.swift in Sources */,
 				18C5DFB51F29D1AB002CFD57 /* TextVC.swift in Sources */,
 			);
@@ -200,6 +208,8 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEBUG_ACTIVITY_MODE = "";
+				"DEBUG_ACTIVITY_MODE[sdk=iphonesimulator*]" = disable;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -251,6 +261,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEBUG_ACTIVITY_MODE = "";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -275,10 +286,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = B66A92GL98;
+				DEVELOPMENT_TEAM = 3TY58QN48R;
 				INFOPLIST_FILE = TranslateThisV2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = RD.TranslateThisV2;
+				PRODUCT_BUNDLE_IDENTIFIER = RCV.TranslateThisV2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -288,10 +299,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = B66A92GL98;
+				DEVELOPMENT_TEAM = 3TY58QN48R;
 				INFOPLIST_FILE = TranslateThisV2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = RD.TranslateThisV2;
+				PRODUCT_BUNDLE_IDENTIFIER = RCV.TranslateThisV2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

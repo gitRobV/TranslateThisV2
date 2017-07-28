@@ -88,7 +88,7 @@
         <!--Text-->
         <scene sceneID="WYm-XF-zGO">
             <objects>
-                <viewController id="WoH-ya-Qu1" customClass="TextVC" customModule="TranslateThisV2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Text" id="WoH-ya-Qu1" customClass="TextVC" customModule="TranslateThisV2" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="I5E-AG-1G6"/>
                         <viewControllerLayoutGuide type="bottom" id="lqQ-jv-g6n"/>
@@ -184,16 +184,16 @@
             </objects>
             <point key="canvasLocation" x="1920.8" y="478.11094452773619"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Recent Translations-->
         <scene sceneID="UlP-qT-n6z">
             <objects>
-                <tableViewController id="9iA-Sd-0wZ" sceneMemberID="viewController">
+                <tableViewController title="Recent Translations" id="9iA-Sd-0wZ" customClass="TranslationsTVC" customModule="TranslateThisV2" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="jWj-1S-UPu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="jhw-sn-Usz">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TransCell" id="jhw-sn-Usz" customClass="TransCell" customModule="TranslateThisV2" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jhw-sn-Usz" id="QBd-sb-We4">
@@ -208,7 +208,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spoken Text" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0JK-nb-lVI">
-                                            <rect key="frame" x="71" y="8" width="296" height="44"/>
+                                            <rect key="frame" x="63" y="8" width="304" height="44"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -220,25 +220,42 @@
                                                 <constraint firstAttribute="height" constant="1" id="M3K-EK-yNc"/>
                                             </constraints>
                                         </view>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tXP-vB-aQU">
+                                            <rect key="frame" x="0.0" y="0.0" width="55" height="59"/>
+                                            <state key="normal" image="mic_icon"/>
+                                            <connections>
+                                                <action selector="micButtonPressed:" destination="jhw-sn-Usz" eventType="touchUpInside" id="ybp-lY-Rxd"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="BM7-vj-o1p" secondAttribute="bottom" id="50b-14-VJy"/>
+                                        <constraint firstItem="tXP-vB-aQU" firstAttribute="top" secondItem="QBd-sb-We4" secondAttribute="topMargin" constant="-8" id="5Dd-9e-WZR"/>
                                         <constraint firstItem="0JK-nb-lVI" firstAttribute="leading" secondItem="Ru9-Rj-vJ0" secondAttribute="trailing" constant="8" id="Eik-tl-yq9"/>
                                         <constraint firstAttribute="bottom" secondItem="Ru9-Rj-vJ0" secondAttribute="bottom" id="I9N-Sm-Fnj"/>
                                         <constraint firstItem="Ru9-Rj-vJ0" firstAttribute="leading" secondItem="QBd-sb-We4" secondAttribute="leading" id="IEt-MB-Md3"/>
                                         <constraint firstAttribute="bottom" secondItem="0JK-nb-lVI" secondAttribute="bottom" constant="8" id="Q8x-Tj-ky9"/>
+                                        <constraint firstItem="0JK-nb-lVI" firstAttribute="leading" secondItem="tXP-vB-aQU" secondAttribute="trailing" constant="8" id="QWK-Cf-NXu"/>
+                                        <constraint firstItem="tXP-vB-aQU" firstAttribute="leading" secondItem="QBd-sb-We4" secondAttribute="leadingMargin" constant="-8" id="RnY-LU-q9D"/>
                                         <constraint firstAttribute="bottom" secondItem="Ru9-Rj-vJ0" secondAttribute="bottom" id="Wa6-AP-Q1f"/>
+                                        <constraint firstItem="tXP-vB-aQU" firstAttribute="leading" secondItem="QBd-sb-We4" secondAttribute="leadingMargin" constant="-8" id="XqG-kI-qje"/>
                                         <constraint firstAttribute="trailing" secondItem="0JK-nb-lVI" secondAttribute="trailing" constant="8" id="YNr-fF-5Ca"/>
                                         <constraint firstItem="0JK-nb-lVI" firstAttribute="top" secondItem="QBd-sb-We4" secondAttribute="top" constant="8" id="dnc-si-qZx"/>
-                                        <constraint firstItem="0JK-nb-lVI" firstAttribute="leading" secondItem="Ru9-Rj-vJ0" secondAttribute="trailing" constant="16" id="eEY-Xo-E7w"/>
+                                        <constraint firstItem="tXP-vB-aQU" firstAttribute="top" secondItem="QBd-sb-We4" secondAttribute="topMargin" constant="-8" id="e5I-K3-P5T"/>
+                                        <constraint firstItem="0JK-nb-lVI" firstAttribute="leading" secondItem="Ru9-Rj-vJ0" secondAttribute="trailing" constant="8" id="eEY-Xo-E7w"/>
                                         <constraint firstItem="Ru9-Rj-vJ0" firstAttribute="top" secondItem="QBd-sb-We4" secondAttribute="top" id="eai-VP-8sa"/>
                                         <constraint firstItem="Ru9-Rj-vJ0" firstAttribute="top" secondItem="QBd-sb-We4" secondAttribute="top" id="gGp-e8-WbK"/>
+                                        <constraint firstItem="BM7-vj-o1p" firstAttribute="top" secondItem="tXP-vB-aQU" secondAttribute="bottom" constant="-1" id="krS-rI-dgp"/>
                                         <constraint firstAttribute="trailing" secondItem="BM7-vj-o1p" secondAttribute="trailing" id="mhn-lZ-zaU"/>
                                         <constraint firstItem="BM7-vj-o1p" firstAttribute="leading" secondItem="QBd-sb-We4" secondAttribute="leading" id="nkP-Ug-zPc"/>
                                         <constraint firstItem="Ru9-Rj-vJ0" firstAttribute="leading" secondItem="QBd-sb-We4" secondAttribute="leading" id="qYf-m4-Jat"/>
+                                        <constraint firstItem="BM7-vj-o1p" firstAttribute="top" secondItem="tXP-vB-aQU" secondAttribute="bottom" constant="-1" id="xey-IU-bnN"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.52549019607843139" green="0.73333333333333328" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="PhraseLabel" destination="0JK-nb-lVI" id="qql-ZO-i28"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -246,15 +263,16 @@
                             <outlet property="delegate" destination="9iA-Sd-0wZ" id="Dyz-8f-NrG"/>
                         </connections>
                     </tableView>
+                    <tabBarItem key="tabBarItem" systemItem="recents" id="nkQ-6w-p3N"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oFh-EW-D9s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3145" y="71"/>
+            <point key="canvasLocation" x="1921" y="1178"/>
         </scene>
         <!--Voice-->
         <scene sceneID="Hiz-9C-9b2">
             <objects>
-                <viewController id="lWK-tp-D4B" customClass="VoiceVC" customModule="TranslateThisV2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Voice" id="lWK-tp-D4B" customClass="VoiceVC" customModule="TranslateThisV2" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8yQ-ce-20l"/>
                         <viewControllerLayoutGuide type="bottom" id="Uah-bR-4jK"/>
@@ -386,6 +404,7 @@
                     <connections>
                         <segue destination="lWK-tp-D4B" kind="relationship" relationship="viewControllers" id="jgd-OU-LcX"/>
                         <segue destination="WoH-ya-Qu1" kind="relationship" relationship="viewControllers" id="z7n-5i-bSy"/>
+                        <segue destination="9iA-Sd-0wZ" kind="relationship" relationship="viewControllers" id="jbc-T1-Tbw"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DsW-BS-acO" userLabel="First Responder" sceneMemberID="firstResponder"/>
