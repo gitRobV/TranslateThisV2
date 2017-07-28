@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		180E57361F2ABA5D005BF0EE /* VoiceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E57351F2ABA5D005BF0EE /* VoiceVC.swift */; };
 		18C5DFB51F29D1AB002CFD57 /* TextVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C5DFB41F29D1AB002CFD57 /* TextVC.swift */; };
 		18CC4D0A1F29486A00F4662E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CC4D091F29486A00F4662E /* AppDelegate.swift */; };
 		18CC4D0C1F29486A00F4662E /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CC4D0B1F29486A00F4662E /* LogInVC.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		180E57351F2ABA5D005BF0EE /* VoiceVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceVC.swift; sourceTree = "<group>"; };
 		18C5DFB41F29D1AB002CFD57 /* TextVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextVC.swift; sourceTree = "<group>"; };
 		18CC4D061F29486A00F4662E /* TranslateThisV2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TranslateThisV2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18CC4D091F29486A00F4662E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				18CC4D091F29486A00F4662E /* AppDelegate.swift */,
 				18CC4D0B1F29486A00F4662E /* LogInVC.swift */,
 				18C5DFB41F29D1AB002CFD57 /* TextVC.swift */,
+				180E57351F2ABA5D005BF0EE /* VoiceVC.swift */,
 				18CC4D0D1F29486A00F4662E /* Main.storyboard */,
 				18CC4D131F29486A00F4662E /* Assets.xcassets */,
 				18CC4D151F29486A00F4662E /* LaunchScreen.storyboard */,
@@ -143,6 +146,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				180E57361F2ABA5D005BF0EE /* VoiceVC.swift in Sources */,
 				18CC4D121F29486A00F4662E /* TranslateThisV2.xcdatamodeld in Sources */,
 				18CC4D0C1F29486A00F4662E /* LogInVC.swift in Sources */,
 				18CC4D0A1F29486A00F4662E /* AppDelegate.swift in Sources */,
