@@ -21,7 +21,7 @@ class VoiceVC: UIViewController, SFSpeechRecognizerDelegate, UIPickerViewDelegat
     @IBOutlet weak var translatedTextLabel: UILabel!
     @IBOutlet weak var recordBtnVisual: UIButton!
     
-    var languages = ["Spanish", "Korean", "Portuguese", "English"]
+    var languages = ["Spanish", "Korean", "Portuguese", "English", "French", "German", "Italian", "Japanese", "Polish"]
     var language = "es"
     var voice = "es-MX"
     var transText = ""
@@ -235,9 +235,30 @@ class VoiceVC: UIViewController, SFSpeechRecognizerDelegate, UIPickerViewDelegat
                 language = "en"
                 voice = "en-US"
                 pickerIdx = 3
+            } else if pickerView.selectedRow(inComponent: 0) == 4 {
+                language = "fr"
+                voice = "fr-FR"
+                pickerIdx = 4
+            } else if pickerView.selectedRow(inComponent: 0) == 5 {
+                language = "de"
+                voice = "de-DE"
+                pickerIdx = 5
+                
+            } else if pickerView.selectedRow(inComponent: 0) == 6 {
+                language = "it"
+                voice = "it-IT"
+                pickerIdx = 6
+            } else if pickerView.selectedRow(inComponent: 0) == 7 {
+                language = "ja"
+                voice = "ja-JP"
+                pickerIdx = 7
+            } else if pickerView.selectedRow(inComponent: 0) == 8 {
+                language = "pl"
+                voice = "pl-PL"
+                pickerIdx = 8
             }
-            
-            
+        
+        
             
             
             

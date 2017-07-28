@@ -42,22 +42,32 @@ class TextVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
             print(pickerView.selectedRow(inComponent: 0))
             if pickerView.selectedRow(inComponent: 0) == 0{
                 language = "es"
-                voice = "es-ES"
-                process = "Traduciendo ahora"
+                voice = "es-MX"
             } else if pickerView.selectedRow(inComponent: 0) == 1 {
                 language = "ko"
                 voice = "ko-KR"
-                process = "지금 번역 중입니다"
             } else if pickerView.selectedRow(inComponent: 0) == 2 {
                 language = "pt"
                 voice = "pt-BR"
-                process = "Traduzindo agora"
             } else if pickerView.selectedRow(inComponent: 0) == 3 {
                 language = "en"
                 voice = "en-US"
-                process = "Translating Now"
+            } else if pickerView.selectedRow(inComponent: 0) == 4 {
+                language = "fr"
+                voice = "fr-FR"
+            } else if pickerView.selectedRow(inComponent: 0) == 5 {
+                language = "de"
+                voice = "de-DE"
+            } else if pickerView.selectedRow(inComponent: 0) == 6 {
+                language = "it"
+                voice = "it-IT"
+            } else if pickerView.selectedRow(inComponent: 0) == 7 {
+                language = "ja"
+                voice = "ja-JP"
+            } else if pickerView.selectedRow(inComponent: 0) == 8 {
+                language = "pl"
+                voice = "pl-PL"
             }
-            
             
             self.selectedVoice = voice
             
@@ -266,7 +276,7 @@ class TextVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
         
     }
     
-    var languages = ["Spanish", "Korean", "Portuguese", "English"]
+    var languages = ["Spanish", "Korean", "Portuguese", "English", "French", "German", "Italian", "Japanese", "Polish"]
     
     
     func dismissKeyboard() {
