@@ -155,6 +155,11 @@ class VoiceVC: UIViewController, SFSpeechRecognizerDelegate, UIPickerViewDelegat
         super.viewDidLoad()
         self.pickerView.dataSource = self as? UIPickerViewDataSource
         self.pickerView.delegate = self as? UIPickerViewDelegate
+        if let user = username {
+            let greeting = "\(String(describing: user)), What would you like to translate"
+            self.speak(string: greeting, language: "en-US")
+        }
+
         // Do any additional setup after loading the view, typically from a nib.
     }
     
