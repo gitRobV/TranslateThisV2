@@ -60,6 +60,8 @@ class VoiceVC: UIViewController, SFSpeechRecognizerDelegate, UIPickerViewDelegat
         let user = username!
         
         var user_id: Int?
+        var translated_lang: String?
+        translated_lang = voice
         
         
         let userAPI = "http://13.59.119.156/users/"
@@ -67,6 +69,9 @@ class VoiceVC: UIViewController, SFSpeechRecognizerDelegate, UIPickerViewDelegat
         
         getRequestSession(urlStr: userAPI, completionHandler: {
             data, response, error in
+            print("Data: \(String(describing: data))")
+            print("Response: \(String(describing: response))")
+            print("Error: \(String(describing: error))")
             
             do {
                 if let requestResults = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSArray {
@@ -84,7 +89,7 @@ class VoiceVC: UIViewController, SFSpeechRecognizerDelegate, UIPickerViewDelegat
                     
                     if userExists == true {
                         
-                        self.postPhraseRequestSession(urlStr: phraseAPI, user_id: user_id!, newPhrase: newPhrase!, newTrans: newTrans!, completionHandler: {
+                        self.postPhraseRequestSession(urlStr: phraseAPI, user_id: user_id!, newPhrase: newPhrase!, newTrans: newTrans!, translated_lang: translated_lang!, completionHandler: {
                             data, response, error in
                             do {
                                 
@@ -103,7 +108,7 @@ class VoiceVC: UIViewController, SFSpeechRecognizerDelegate, UIPickerViewDelegat
                                     if let newUser = userData["id"] {
                                         user_id = newUser as? Int
                                     }
-                                    self.postPhraseRequestSession(urlStr: phraseAPI, user_id: user_id!, newPhrase: newPhrase!, newTrans: newTrans!, completionHandler: {
+                                    self.postPhraseRequestSession(urlStr: phraseAPI, user_id: user_id!, newPhrase: newPhrase!, newTrans: newTrans!, translated_lang: translated_lang!,  completionHandler: {
                                         data, resones, error in
                                         
                                         do {
@@ -118,6 +123,8 @@ class VoiceVC: UIViewController, SFSpeechRecognizerDelegate, UIPickerViewDelegat
                 }
             } catch { print(error) }
         })
+        self.spokenTextLabel.text = nil
+        self.translatedTextLabel.text = "Saved"
     }
     
     @IBAction func playBtn(_ sender: UIButton) {
@@ -309,11 +316,11 @@ class VoiceVC: UIViewController, SFSpeechRecognizerDelegate, UIPickerViewDelegat
     }
     
     
-    func postPhraseRequestSession(urlStr: String, user_id: Int, newPhrase: String, newTrans: String,  completionHandler:@escaping(_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void)  {
+    func postPhraseRequestSession(urlStr: String, user_id: Int, newPhrase: String, newTrans: String, translated_lang: String, completionHandler:@escaping(_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void)  {
         if let url = URL(string: urlStr){
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
-            let bodyData = "user=\(user_id)&phrase=\(newPhrase)&translation=\(newTrans)"
+            let bodyData = "user=\(user_id)&phrase=\(newPhrase)&translation=\(newTrans)&translation_lang=\(translated_lang)"
             request.httpBody = bodyData.data(using: .utf8)
             let session = URLSession.shared
             let task = session.dataTask(with: request as URLRequest, completionHandler: completionHandler)
