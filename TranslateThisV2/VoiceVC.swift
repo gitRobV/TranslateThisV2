@@ -17,11 +17,7 @@ class VoiceVC: UIViewController, SFSpeechRecognizerDelegate, UIPickerViewDelegat
     //Variables and Outlets
     
     @IBOutlet weak var pickerView: UIPickerView!
-    
-    
     @IBOutlet weak var spokenTextLabel: UILabel!
-    
-    
     @IBOutlet weak var translatedTextLabel: UILabel!
     @IBOutlet weak var recordBtnVisual: UIButton!
     
@@ -35,7 +31,7 @@ class VoiceVC: UIViewController, SFSpeechRecognizerDelegate, UIPickerViewDelegat
     let speechRecognizer: SFSpeechRecognizer? = SFSpeechRecognizer()
     let request = SFSpeechAudioBufferRecognitionRequest()
     var recognitionTask: SFSpeechRecognitionTask?
-    var audioPlayer: AVAudioPlayer!
+//    var audioPlayer: AVAudioPlayer!
     let synthesizer = AVSpeechSynthesizer()
     var recording = false
     
@@ -135,7 +131,7 @@ class VoiceVC: UIViewController, SFSpeechRecognizerDelegate, UIPickerViewDelegat
         } else{
             translate(text: spokenTextLabel.text)
             sleep(1)
-            speak(string: transText, language: voice)
+            self.speak(string: transText, language: voice)
         }
     }
 
@@ -297,6 +293,7 @@ class VoiceVC: UIViewController, SFSpeechRecognizerDelegate, UIPickerViewDelegat
                 if voice.language == language {
                     voiceToUse = voice
                     print("Found Voice to use: \(voice)")
+                    
                 }
             }
         }
@@ -304,6 +301,7 @@ class VoiceVC: UIViewController, SFSpeechRecognizerDelegate, UIPickerViewDelegat
         let rawText = string
         let utterance = AVSpeechUtterance(string: rawText)
         utterance.voice = voiceToUse
+        print(utterance.volume)
         self.synthesizer.speak(utterance)
         
     }
