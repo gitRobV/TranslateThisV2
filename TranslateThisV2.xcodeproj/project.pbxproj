@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		157F9FE91F4A05B0009D50A6 /* ImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157F9FE81F4A05B0009D50A6 /* ImageVC.swift */; };
 		15A695D81F2BAE5900FD55FE /* myTranslationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A695D71F2BAE5900FD55FE /* myTranslationsVC.swift */; };
 		180E57361F2ABA5D005BF0EE /* VoiceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E57351F2ABA5D005BF0EE /* VoiceVC.swift */; };
 		18C5DFB51F29D1AB002CFD57 /* TextVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C5DFB41F29D1AB002CFD57 /* TextVC.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		157F9FE81F4A05B0009D50A6 /* ImageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageVC.swift; sourceTree = "<group>"; };
 		15A695D71F2BAE5900FD55FE /* myTranslationsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myTranslationsVC.swift; sourceTree = "<group>"; };
 		180E57351F2ABA5D005BF0EE /* VoiceVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceVC.swift; sourceTree = "<group>"; };
 		18C5DFB41F29D1AB002CFD57 /* TextVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextVC.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 				18CC4D0B1F29486A00F4662E /* LogInVC.swift */,
 				18C5DFB41F29D1AB002CFD57 /* TextVC.swift */,
 				180E57351F2ABA5D005BF0EE /* VoiceVC.swift */,
+				157F9FE81F4A05B0009D50A6 /* ImageVC.swift */,
 				18E8C7C21F2AD7B100CA2AB6 /* TransCell.swift */,
 				18E8C7C01F2AD08A00CA2AB6 /* TranslationsTVC.swift */,
 				18CC4D0D1F29486A00F4662E /* Main.storyboard */,
@@ -163,6 +166,7 @@
 				18E8C7C11F2AD08A00CA2AB6 /* TranslationsTVC.swift in Sources */,
 				18CC4D0A1F29486A00F4662E /* AppDelegate.swift in Sources */,
 				18C5DFB51F29D1AB002CFD57 /* TextVC.swift in Sources */,
+				157F9FE91F4A05B0009D50A6 /* ImageVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
