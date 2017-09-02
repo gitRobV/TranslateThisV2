@@ -108,6 +108,7 @@ class TranslationsTVC: UITableViewController {
         let indexOffset = phrases.count - 1
         let newIndex = indexOffset - indexPath.row
         cell.PhraseLabel.text = phrases[newIndex]["phrase"] as? String
+        cell.languageLabel.text = phrases[newIndex]["translation_lang"] as? String
         cell.indexPath = indexPath as NSIndexPath
         cell.Delegate = self
         return cell

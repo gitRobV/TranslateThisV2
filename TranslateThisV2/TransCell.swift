@@ -18,6 +18,8 @@ class TransCell: UITableViewCell {
     
     
     @IBOutlet weak var PhraseLabel: UILabel!
+    @IBOutlet weak var languageLabel: UILabel!
+    
     
     @IBAction func micButtonPressed(_ sender: UIButton) {
         Delegate?.speakTranslation(for: indexPath!)

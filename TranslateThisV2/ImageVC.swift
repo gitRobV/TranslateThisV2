@@ -110,8 +110,6 @@ class ImageVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, U
     func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
         return true
     }
-
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -143,9 +141,7 @@ class ImageVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, U
                 
             print("the souce type \(picker.sourceType.rawValue)")
             
-//            if picker.sourceType == UIImagePickerControllerSourceType.photoLibrary {
-//                    
-//                }
+            //determine if user imported image or took a new one
             var size = 100 as CGFloat
             if picker.sourceType.rawValue == 1 {
                 size = 0.7 as CGFloat

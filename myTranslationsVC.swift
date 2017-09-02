@@ -127,6 +127,8 @@ class myTranslationsVC: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TransCell", for: indexPath) as! TransCell
         let indexOffset = phaveList.count - 1
         let newIndex = indexOffset - indexPath.row
+        print("printing ===== ")
+        print(phaveList[newIndex])
         cell.PhraseLabel.text = phaveList[newIndex]["phrase"] as? String
         cell.indexPath = indexPath as NSIndexPath
         cell.Delegate2 = self
