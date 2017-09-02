@@ -23,6 +23,7 @@ class ImageVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, U
     var voice = "es-MX"
     var imageText = ""
     var transText = ""
+    var translatedText = ""
     var pickerIdx = 0
     var username: String?
     let synthesizer = AVSpeechSynthesizer()
@@ -37,23 +38,46 @@ class ImageVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, U
         image.delegate = self
         image.sourceType = UIImagePickerControllerSourceType.photoLibrary
         image.allowsEditing = false
+        image.modalPresentationStyle = .popover
         self.present(image, animated: true) {
         }
     }
+    
+    @IBAction func takePictureBtn(_ sender: UIButton) {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let image = UIImagePickerController()
+            image.delegate = self
+            image.allowsEditing = false
+            image.sourceType = UIImagePickerControllerSourceType.camera
+            image.cameraCaptureMode = .photo
+            image.modalPresentationStyle = .fullScreen
+            print("before")
+            present(image, animated: true, completion: nil)
+            print("after")
+            image.popoverPresentationController?.sourceView = sender
+            image.popoverPresentationController?.sourceRect = CGRect(x: 0, y: 0, width: sender.frame.size.width, height: sender.frame.size.height)
+        } else {
+            noCamera()
+        }
+    }
+    
+    
+    
+    
     @IBAction func translateBtn(_ sender: UIButton) {
-        var translatedText = translate(text: imageText)
+//        var translatedText = translate(text: imageText)
         if translatedText == "" {
-            imageTextView.text = "Please import or take a new photo and select language"
-            self.speak(string: imageTextView.text, language: voice)
+            imageTextView.text = "Please import or take a new photo, and select a language"
+            self.speak(string: imageTextView.text, language: "en-US")
         } else {
             if pickerView.selectedRow(inComponent: 0) == pickerIdx {
-                imageTextView.text = translatedText
-                speak(string: imageTextView.text!, language: voice)
+                imageTextView.text = transText
+                speak(string: transText, language: voice)
             } else{
                 translatedText = translate(text: imageText)
                 sleep(1)
-                imageTextView.text = translatedText
-                self.speak(string: translatedText, language: voice)
+//                imageTextView.text = translatedText
+                self.speak(string: transText, language: voice)
             }
 
         }
@@ -73,6 +97,19 @@ class ImageVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, U
         return languages[row] as String
         
     }
+    
+    //popover info
+    func prepareForPopoverPresentation(_ popoverPresentationController: UIPopoverPresentationController) {
+        
+    }
+    
+    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
+        
+    }
+    
+    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        return true
+    }
 
     
     
@@ -81,6 +118,7 @@ class ImageVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, U
         
         self.pickerView.dataSource = self
         self.pickerView.delegate = self
+        popoverPresentationController?.delegate = self as? UIPopoverPresentationControllerDelegate
         if let user = username {
             let greeting = "\(String(describing: user)), What would you like to translate"
             self.speak(string: greeting, language: "en-US")
@@ -93,10 +131,26 @@ class ImageVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, U
     
     //Gen Functions
     
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            importImageView.contentMode = .scaleAspectFit
             importImageView.image = image
-            let imageData:NSData = UIImageJPEGRepresentation(image, 100)! as NSData
+            let newImage = convertToGrayScale(image: image)
+                
+            print("the souce type \(picker.sourceType.rawValue)")
+            
+//            if picker.sourceType == UIImagePickerControllerSourceType.photoLibrary {
+//                    
+//                }
+            var size = 100 as CGFloat
+            if picker.sourceType.rawValue == 1 {
+                size = 0.7 as CGFloat
+            }
+            let imageData:NSData = UIImageJPEGRepresentation(newImage, size)! as NSData
             
             let user = username!
             
@@ -140,6 +194,7 @@ class ImageVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, U
                                             self.imageTextView.text = requestResults["phrase"] as! String
                                         }
                                         self.imageText = requestResults["phrase"] as! String
+                                        self.translatedText = self.translate(text: self.imageText)
                                     }
                                     else{print("the else else else")}
                                 } catch { print("the catch \(error)")
@@ -172,6 +227,7 @@ class ImageVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, U
                                                         self.imageTextView.text = requestResults["phrase"] as! String
                                                     }
                                                     self.imageText = requestResults["phrase"] as! String
+                                                    self.translatedText = self.translate(text: self.imageText)
                             
                                                 } else{
                                                     print("in the newuser else else")
@@ -278,6 +334,22 @@ class ImageVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, U
         }
         return imageTextView.text!
     }
+    
+    func noCamera(){
+        let alertVC = UIAlertController(
+            title: "No Camera",
+            message: "Sorry, this device has no camera",
+            preferredStyle: .alert)
+        let okAction = UIAlertAction(
+            title: "OK",
+            style:.default,
+            handler: nil)
+        alertVC.addAction(okAction)
+        present(
+            alertVC,
+            animated: true,
+            completion: nil)
+    }
 
     //imported funcs
     func getRequestSession(urlStr: String, completionHandler:@escaping (_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void) {
@@ -357,6 +429,23 @@ class ImageVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, U
         utterance.voice = voiceToUse
         print(utterance.volume)
         self.synthesizer.speak(utterance)
+    }
+    
+    private func convertToGrayScale(image: UIImage) -> UIImage {
+        let imageRect:CGRect = CGRect(x:0, y:0, width:image.size.width, height: image.size.height)
+        let colorSpace = CGColorSpaceCreateDeviceGray()
+        let width = image.size.width
+        let height = image.size.height
+        
+        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.none.rawValue)
+        let context = CGContext(data: nil, width: Int(width), height: Int(height), bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: bitmapInfo.rawValue)
+        //have to draw before create image
+        
+        context?.draw(image.cgImage!, in: imageRect)
+        let imageRef = context!.makeImage()
+        let newImage = UIImage(cgImage: imageRef!)
+        
+        return newImage
     }
     
 }

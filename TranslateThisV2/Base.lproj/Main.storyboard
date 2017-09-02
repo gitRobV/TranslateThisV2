@@ -432,16 +432,19 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hF7-wT-a8u">
-                                <rect key="frame" x="16" y="216" width="343" height="30"/>
+                                <rect key="frame" x="16" y="216" width="169" height="30"/>
+                                <color key="backgroundColor" red="0.94901960780000005" green="0.3921568627" blue="0.098039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="26l-EZ-sni"/>
                                 </constraints>
-                                <state key="normal" title="Import Image"/>
+                                <state key="normal" title="Import Image">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="importImageBtn:" destination="DvU-fO-ulH" eventType="touchUpInside" id="lZT-Qy-38S"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="image text" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qg8-Jh-lNP">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Please import an image or take a new picture to translate." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qg8-Jh-lNP">
                                 <rect key="frame" x="16" y="254" width="343" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -451,34 +454,53 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pJf-6C-CZ0">
-                                <rect key="frame" x="0.0" y="362" width="375" height="200"/>
+                                <rect key="frame" x="0.0" y="354" width="375" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="ycf-Iu-W5j"/>
                                 </constraints>
                             </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ydf-Cr-Cv6">
+                                <rect key="frame" x="193" y="216" width="166" height="30"/>
+                                <color key="backgroundColor" red="0.94901960780000005" green="0.3921568627" blue="0.098039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="po8-Hn-I3T"/>
+                                </constraints>
+                                <state key="normal" title="Take Picture">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="takePictureBtn:" destination="DvU-fO-ulH" eventType="touchUpInside" id="pDa-od-IQa"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SB8-H6-ohQ">
-                                <rect key="frame" x="16" y="570" width="343" height="30"/>
+                                <rect key="frame" x="16" y="562" width="343" height="30"/>
+                                <color key="backgroundColor" red="0.94901960780000005" green="0.3921568627" blue="0.098039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="h0f-sG-WVN"/>
                                 </constraints>
-                                <state key="normal" title="Translate"/>
+                                <state key="normal" title="Translate">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="translateBtn:" destination="DvU-fO-ulH" eventType="touchUpInside" id="Juq-LU-Pi6"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.52549019607843139" green="0.73333333333333328" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="SB8-H6-ohQ" firstAttribute="leading" secondItem="gcg-bd-Gvp" secondAttribute="leadingMargin" id="0r6-xG-siu"/>
-                            <constraint firstItem="pJf-6C-CZ0" firstAttribute="leading" secondItem="gcg-bd-Gvp" secondAttribute="leading" id="6FP-2b-ShL"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="hF7-wT-a8u" secondAttribute="trailing" id="6is-gg-UG4"/>
+                            <constraint firstItem="Ydf-Cr-Cv6" firstAttribute="leading" secondItem="hF7-wT-a8u" secondAttribute="trailing" constant="8" id="5Xj-Wh-O1b"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hF7-wT-a8u" secondAttribute="trailing" constant="174" id="6is-gg-UG4"/>
                             <constraint firstItem="qg8-Jh-lNP" firstAttribute="leading" secondItem="gcg-bd-Gvp" secondAttribute="leadingMargin" id="7ie-YA-0lj"/>
                             <constraint firstAttribute="trailing" secondItem="pJf-6C-CZ0" secondAttribute="trailing" id="8mJ-Dz-7DF"/>
                             <constraint firstItem="hF7-wT-a8u" firstAttribute="top" secondItem="XWr-bL-IQJ" secondAttribute="bottom" constant="8" id="HVZ-Gt-x2U"/>
-                            <constraint firstItem="pJf-6C-CZ0" firstAttribute="top" secondItem="qg8-Jh-lNP" secondAttribute="bottom" constant="8" id="JNg-4s-aIi"/>
                             <constraint firstAttribute="trailingMargin" secondItem="XWr-bL-IQJ" secondAttribute="trailing" id="KTh-L7-jT0"/>
+                            <constraint firstItem="pJf-6C-CZ0" firstAttribute="leading" secondItem="gcg-bd-Gvp" secondAttribute="leading" id="M8w-yV-2rp"/>
+                            <constraint firstItem="Ydf-Cr-Cv6" firstAttribute="top" secondItem="XWr-bL-IQJ" secondAttribute="bottom" constant="8" id="Mlt-g1-QqG"/>
                             <constraint firstItem="XWr-bL-IQJ" firstAttribute="leading" secondItem="gcg-bd-Gvp" secondAttribute="leadingMargin" id="NqS-gq-9ax"/>
+                            <constraint firstItem="pJf-6C-CZ0" firstAttribute="top" secondItem="qg8-Jh-lNP" secondAttribute="bottom" id="Y4s-Wn-xaP"/>
                             <constraint firstItem="qg8-Jh-lNP" firstAttribute="top" secondItem="hF7-wT-a8u" secondAttribute="bottom" constant="8" id="Y6F-Rk-auo"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Ydf-Cr-Cv6" secondAttribute="trailing" id="bJs-FE-1Ku"/>
                             <constraint firstItem="hF7-wT-a8u" firstAttribute="leading" secondItem="gcg-bd-Gvp" secondAttribute="leadingMargin" id="dXe-2I-CMQ"/>
                             <constraint firstItem="SB8-H6-ohQ" firstAttribute="top" secondItem="pJf-6C-CZ0" secondAttribute="bottom" constant="8" id="dtA-Cu-2px"/>
                             <constraint firstItem="XWr-bL-IQJ" firstAttribute="top" secondItem="gcg-bd-Gvp" secondAttribute="topMargin" constant="8" id="t3c-xb-Irw"/>
@@ -496,7 +518,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mIW-xM-xOb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="118" y="1178"/>
+            <point key="canvasLocation" x="117.59999999999999" y="1177.961019490255"/>
         </scene>
         <!--Recent Translations-->
         <scene sceneID="rWo-Hc-iu0">

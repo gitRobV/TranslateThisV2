@@ -16,6 +16,7 @@ class TextVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
     let synthesizer = AVSpeechSynthesizer()
     var selectedVoice: String?
+    let myApiKey = "AIzaSyDLB5AS9JR78nUBcCIOxVaFuLCJnUjcNeA"
     
     
     
@@ -71,8 +72,10 @@ class TextVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
             
             self.selectedVoice = voice
             
-            let url = URL(string: "https://translation.googleapis.com/language/translate/v2?key=AIzaSyCxfmolIMWqxSLSJZXvBCkT1gmNKrbDRvQ&q=" + parsedString + "&target=" + language)
+//            let url = URL(string: "https://translation.googleapis.com/language/translate/v2?key=AIzaSyCxfmolIMWqxSLSJZXvBCkT1gmNKrbDRvQ&q=" + parsedString + "&target=" + language)
             
+            let url = URL(string: "https://translation.googleapis.com/language/translate/v2?key=" + myApiKey + "&q="
+                + parsedString + "&target=" + language)
             
             
             let session = URLSession.shared

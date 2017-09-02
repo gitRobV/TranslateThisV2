@@ -27,6 +27,7 @@ class VoiceVC: UIViewController, SFSpeechRecognizerDelegate, UIPickerViewDelegat
     var transText = ""
     var pickerIdx = 0
     var username: String?
+    let myApiKey = "AIzaSyDLB5AS9JR78nUBcCIOxVaFuLCJnUjcNeA"
     let audioEngine = AVAudioEngine()
     let speechRecognizer: SFSpeechRecognizer? = SFSpeechRecognizer()
     let request = SFSpeechAudioBufferRecognitionRequest()
@@ -263,7 +264,9 @@ class VoiceVC: UIViewController, SFSpeechRecognizerDelegate, UIPickerViewDelegat
             
             
             print(newToBeTranslated)
-            let url = URL(string: "https://translation.googleapis.com/language/translate/v2?key=AIzaSyCxfmolIMWqxSLSJZXvBCkT1gmNKrbDRvQ&q=" + newToBeTranslated + "&target=" + language)
+            
+            let url = URL(string: "https://translation.googleapis.com/language/translate/v2?key=" + myApiKey + "&q="
+                + newToBeTranslated + "&target=" + language)
             // create a URLSession to handle the request tasks
             let session = URLSession.shared
             // create a "data task" to make the request and run completion handler
