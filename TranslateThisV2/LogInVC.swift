@@ -67,14 +67,18 @@ class LogInVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
             let tabBarController = segue.destination as! UITabBarController
             let destinationIVC = tabBarController.viewControllers?[4] as! ImageVC
+            let destinationMTVC = tabBarController.viewControllers?[3] as! MyTranslationsVC
+//            let destinationTTVC = tabBarController.viewControllers?[2] as! MyTranslationsVC
             let destinationTVC = tabBarController.viewControllers?[1] as! TextVC
             let destinationVVC = tabBarController.viewControllers?[0] as! VoiceVC
             destinationIVC.username = sender as? String
+            destinationMTVC.username = sender as? String
+//            destinationTTVC.username = sender as? String
             destinationTVC.username = sender as? String
             destinationVVC.username = sender as? String
         }
         
-        
+    
         override func viewDidLoad() {
             super.viewDidLoad()
             
