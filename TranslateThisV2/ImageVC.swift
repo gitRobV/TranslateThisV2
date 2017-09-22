@@ -28,8 +28,8 @@ class ImageVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, U
     var username: String?
     let synthesizer = AVSpeechSynthesizer()
     let myApiKey = "AIzaSyDLB5AS9JR78nUBcCIOxVaFuLCJnUjcNeA"
-    let userAPI = "http://13.59.119.156/users/"
-    let photoAPI = "http://13.59.119.156/photos/"
+    let userAPI = "http://13.59.227.74/users/"
+    let photoAPI = "http://13.59.227.74/photos/"
 
     
     //Buttons

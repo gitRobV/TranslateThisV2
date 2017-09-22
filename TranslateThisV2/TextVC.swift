@@ -127,8 +127,8 @@ class TextVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
         }
         
         
-        let userAPI = "http://13.59.119.156/users/"
-        let phraseAPI = "http://13.59.119.156/phrases/"
+        let userAPI = "http://13.59.227.74/users/"
+        let phraseAPI = "http://13.59.227.74/phrases/"
         
         getRequestSession(urlStr: userAPI, completionHandler: {
             data, response, error in

@@ -19,7 +19,7 @@ class TranslationsTVC: UITableViewController {
     
     var phrases = [NSDictionary] ()
     let synthesizer = AVSpeechSynthesizer()
-    let PhrasesAPI = "http://13.59.119.156/phrases/"
+    let PhrasesAPI = "http://13.59.227.74/phrases/"
     
     
     func getRequestSession(urlStr: String, completionHandler:@escaping (_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void) {
@@ -61,6 +61,7 @@ class TranslationsTVC: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        phrases = []
         getRequestSession(urlStr: PhrasesAPI, completionHandler: {
             data, response, error in
             do {

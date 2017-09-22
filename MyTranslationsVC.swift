@@ -16,8 +16,10 @@ class MyTranslationsVC: UITableViewController {
     var user_id: Int?
     var phrases = [NSDictionary] ()
     let synthesizer = AVSpeechSynthesizer()
-    let PhrasesAPI = "http://13.59.119.156/phrases/"
-    let userAPI = "http://13.59.119.156/users/"
+
+    
+    let PhrasesAPI = "http://13.59.227.74/phrases/"
+    let userAPI = "http://13.59.227.74/users/"
     
     
     func getRequestSession(urlStr: String, completionHandler:@escaping (_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void) {
@@ -77,9 +79,9 @@ class MyTranslationsVC: UITableViewController {
                                     print("the ONE")
                                     print("the user id is -- 1  -- \(String(describing: self.user_id!))")
                                 }
-                                print(self.user_id)
-                                print("the user id ^^^^")
-                                print("the user id is -- 2  -- \(String(describing: self.user_id!))")
+//                                print(self.user_id)
+//                                print("the user id ^^^^")
+//                                print("the user id is -- 2  -- \(String(describing: self.user_id!))")
                             }
                             print("the ONE-two")
                         }
@@ -89,7 +91,7 @@ class MyTranslationsVC: UITableViewController {
                 catch{
                     print("no user")
                 }
-                print("the user id is -- 3  -- \(String(describing: self.user_id!))")
+//                print("the user id is -- 3  -- \(String(describing: self.user_id!))")
                 
                 ///////////////
                 self.getRequestSession(urlStr: self.PhrasesAPI, completionHandler: {
